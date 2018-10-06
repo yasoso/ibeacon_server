@@ -1,5 +1,5 @@
 $(function() {
-    ws = new WebSocket("ws://192.168.1.5:4000");
+    ws = new WebSocket("ws://desolate-dusk-67291.herokuapp.com");
     
     var stock_request = {
         "stocks": ["1", "2", "3", "4", "5","6", "7", "8", "9", "10","11", "12", "13", "14", "15","16"]
