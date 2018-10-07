@@ -10,27 +10,24 @@ var csv = require('./routes/exportcsv');
 var usersRouter = require('./routes/users');
 //var WebSocketServer = require('websocket').server;
 var http = require('http');
-
-
 require('date-utils');
 var dateFormat = require('dateformat');
+
 //client
-
-var WebSocketServerclint = require('ws').Server;
+var WebSocketServer = require('ws').Server;
 //{port:4000}
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 9000;
+var port_client = process.env.PORT || 5000;
+//var wss = new WebSocketServer({port:4000});
 
-//var wss = new WebSocketServerclint({port:4000});
-
-
-var server_client = http.createServer();
+// var server_client = http.createServer();
 var app = express()
-
+// app.use(express.static(__dirname + '/'));
 var server = http.createServer(app)
-server.listen(port)
+server.listen(port_client)
 
-console.log("http server listening on %d", port)
-var wss = new WebSocketServerclint({server: server})
+//console.log("http server listening on %d", port)
+var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 
@@ -87,11 +84,11 @@ var timer14 = null;
 var timer15 = null;
 var timer16 = null;
 //server起動
-var server = http.createServer(function(request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
-});
+// var server = http.createServer(function(request, response) {
+//     console.log((new Date()) + ' Received request for ' + request.url);
+//     response.writeHead(404);
+//     response.end();
+// });
 
 // server.listen(12345, function() {
 //     console.log((new Date()) + ' Server is listening on port 12345');
@@ -495,7 +492,6 @@ app.post('/', function(req, res) {
     res.send('POST request to the homepage');
 
 })
-console.log('Server is online.');
 
 function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
