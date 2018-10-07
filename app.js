@@ -6,21 +6,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
-var csv = require('./routes/exportcsv');
 var usersRouter = require('./routes/users');
 // var WebSocketServer = require('websocket').server;
-var http = require('http');
+var https = require('https');
 require('date-utils');
 var dateFormat = require('dateformat');
-
 
 //client
 var WebSocketServer = require('ws').Server;
 
 // var port = process.env.PORT || 9000;
- var PORT = process.env.PORT || 3000;
+//var PORT = process.env.PORT || 3000;
 //-----------------------------------
-var wss = new WebSocketServer({port: 4000});
+var wss = new WebSocketServer({port: 8443});
 //-----------------------------------
 // var server_client = http.createServer();
 var app = express()

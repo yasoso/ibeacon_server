@@ -13,15 +13,17 @@
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "jade": "*",
     "json2csv": "^4.2.1",
     "morgan": "~1.9.0",
     "object-assign": "^4.1.1",
     "websocket": "^1.0.26",
+    "websocket.io": "^0.2.1",
     "ws": "^6.0.0",
-    "jade": "*"
+    "wss": "^3.3.4"
   },
   "engines": {
     "node": "8.11.4",
-    "npm":  "5.6.0"
+    "npm": "5.6.0"
   }
 }
