@@ -8,8 +8,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var csv = require('./routes/exportcsv');
 var usersRouter = require('./routes/users');
-var WebSocketServer = require('websocket').server;
+//var WebSocketServer = require('websocket').server;
 var http = require('http');
+
 
 require('date-utils');
 var dateFormat = require('dateformat');
@@ -17,9 +18,22 @@ var dateFormat = require('dateformat');
 
 var WebSocketServerclint = require('ws').Server;
 //{port:4000}
-var wss = new WebSocketServerclint({port:4000});
+var port = process.env.PORT || 3000;
+
+//var wss = new WebSocketServerclint({port:4000});
+
+
 var server_client = http.createServer();
 var app = express()
+
+var server = http.createServer(app)
+server.listen(port)
+
+console.log("http server listening on %d", port)
+
+var wss = new WebSocketServer({server: server})
+console.log("websocket server created")
+
 
 var stocks = {"1": 0,
               "2": 0,
@@ -84,15 +98,15 @@ var server = http.createServer(function(request, response) {
 //     console.log((new Date()) + ' Server is listening on port 12345');
 // });
 
-wsServer = new WebSocketServer({
-    httpServer: server,
-    // You should not use autoAcceptConnections for production
-    // applications, as it defeats all standard cross-origin protection
-    // facilities built into the protocol and the browser.  You should
-    // *always* verify the connection's origin and decide whether or not
-    // to accept it.
-    autoAcceptConnections: false
-});
+// wsServer = new WebSocketServer({
+//     httpServer: server,
+//     // You should not use autoAcceptConnections for production
+//     // applications, as it defeats all standard cross-origin protection
+//     // facilities built into the protocol and the browser.  You should
+//     // *always* verify the connection's origin and decide whether or not
+//     // to accept it.
+//     autoAcceptConnections: false
+// });
 
 function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
@@ -140,7 +154,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.listen(9000);
+app.listen(port);
 console.log('Server is online.');
 
 app.post('/', function(req, res) {
