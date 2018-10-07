@@ -18,11 +18,16 @@ var dateFormat = require('dateformat');
 var WebSocketServer = require('ws').Server;
 
 // var port = process.env.PORT || 9000;
-// var port_client = process.env.PORT || 5000;
-var wss = new WebSocketServer('wss://desolate-dusk-67291.herokuapp.com');
-
+ var PORT = process.env.PORT || 3000;
+//-----------------------------------
+var wss = new WebSocketServer({port: 4000});
+//-----------------------------------
 // var server_client = http.createServer();
 var app = express()
+
+
+
+
 // app.use(express.static(__dirname + '/'));
 // var server = http.createServer(app)
 // server.listen(port_client)
@@ -150,7 +155,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//app.listen(port);
+app.listen(9000);
 
 console.log('Server is online.');
 
