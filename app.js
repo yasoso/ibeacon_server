@@ -20,7 +20,7 @@ var WebSocketServer = require('ws').Server;
 // var port = process.env.PORT || 9000;
  var PORT = process.env.PORT || 3000;
 //-----------------------------------
-var wss = new WebSocketServer({port: 4000});
+var wss = new WebSocketServer({port: 443});
 //-----------------------------------
 // var server_client = http.createServer();
 var app = express()
