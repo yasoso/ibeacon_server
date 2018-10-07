@@ -18,11 +18,23 @@ var WebSocketServer = require('ws').Server;
 // var port = process.env.PORT || 9000;
 //var PORT = process.env.PORT || 3000;
 //-----------------------------------
+//{port:8443}
 var wss = new WebSocketServer({port:8443});
 //-----------------------------------
 // var server_client = http.createServer();
 var app = express()
 
+//---------------------------------
+// app.use(express.static(__dirname + "/"))
+
+// var server = http.createServer(app)
+// server.listen(5000)
+
+// console.log("http server listening on %d", 5000)
+
+// var wss = new WebSocketServer({server: server})
+// console.log("websocket server created")
+//-------------------------------------
 // var port = process.env.PORT || 5000
 
 // app.use(express.static(__dirname + "/"))
@@ -94,30 +106,7 @@ var timer13 = null;
 var timer14 = null;
 var timer15 = null;
 var timer16 = null;
-//server起動
-//  var server = http.createServer(function(request, response) {
-//      console.log((new Date()) + ' Received request for ' + request.url);
-//      response.writeHead(404);
-//      response.end();
-//  });
 
-//  server.listen(12345, function() {
-//      console.log((new Date()) + ' Server is listening on port 12345');
-//  });
-
-// wsServer = new WebSocketServer({
-//      httpServer: server,
-//     // You should not use autoAcceptConnections for production
-//      // applications, as it defeats all standard cross-origin protection
-//      // facilities built into the protocol and the browser.  You should
-//      // *always* verify the connection's origin and decide whether or not
-//      // to accept it.
-//      autoAcceptConnections: false
-//  });
-// function originIsAllowed(origin) {
-//   // put logic here to detect whether the specified origin is allowed.
-//   return true;
-// }
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -164,7 +153,7 @@ app.listen(9000);
 
 console.log('Server is online.');
 
-app.post('/log', function(req, res) {
+app.post('/', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
     // パラメータ名、nameを出力
