@@ -16,8 +16,8 @@ var dateFormat = require('dateformat');
 //client
 
 var WebSocketServerclint = require('ws').Server;
-var port_h = process.env.PORT || 4000;
-var wss = new WebSocketServerclint({port:4000});
+//{port:4000}
+var wss = new WebSocketServerclint();
 var server_client = http.createServer();
 var app = express()
 
