@@ -20,14 +20,21 @@ var WebSocketServer = require('ws').Server;
 // var port = process.env.PORT || 9000;
  var PORT = process.env.PORT || 3000;
 //-----------------------------------
-var wss = new WebSocketServer({port: 12345});
+//var wss = new WebSocketServer({port: 12345});
 //-----------------------------------
 // var server_client = http.createServer();
 var app = express()
 
 
+//initialize a simple http server
+const server = http.createServer(app);
 
-
+//initialize the WebSocket server instance
+const wss = new WebSocketServer({ server });
+//start our server
+server.listen(process.env.PORT || 4000, () => {
+    console.log(`Server started on port ${server.address().port} :)`);
+});
 // app.use(express.static(__dirname + '/'));
 // var server = http.createServer(app)
 // server.listen(port_client)
@@ -159,7 +166,7 @@ app.listen(9000);
 
 console.log('Server is online.');
 
-app.post('/', function(req, res) {
+app.post('/log', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
     // パラメータ名、nameを出力
