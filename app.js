@@ -13,12 +13,13 @@ var http = require('http');
 require('date-utils');
 var dateFormat = require('dateformat');
 
+
 //client
 var WebSocketServer = require('ws').Server;
 
 // var port = process.env.PORT || 9000;
 // var port_client = process.env.PORT || 5000;
-var wss = new WebSocketServer({port:80});
+var wss = new WebSocketServer('wss://desolate-dusk-67291.herokuapp.com');
 
 // var server_client = http.createServer();
 var app = express()
