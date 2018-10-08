@@ -162,6 +162,7 @@ app.post('/', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
     // パラメータ名、nameを出力
+    res.set('Content-Type', 'application/json');
     console.log(req.body.minor);
      
     if(req.body.minor == 0){
