@@ -158,7 +158,7 @@ app.listen(app.get('port'), function() {
     console.log('Node app is running');
 });
 
-app.post('/', function(req, res) {
+app.post('/minor', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
     // パラメータ名、nameを出力
