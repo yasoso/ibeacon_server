@@ -152,11 +152,12 @@ app.use(bodyParser.json());
 //app.listen(9000);
 
 console.log('Server is online.');
-app.set('port', (process.env.PORT || 9000));
 
-app.listen(app.get('port'), function() {
-    console.log('Node app is running');
-});
+// app.set('port', (process.env.PORT || 9000));
+
+// app.listen(app.get('port'), function() {
+//     console.log('Node app is running');
+// });
 
 app.post('/minor', function(req, res) {
     // リクエストボディを出力
