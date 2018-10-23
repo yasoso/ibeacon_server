@@ -170,7 +170,7 @@ console.log('Server is online.');
 //     console.log('Node app is running');
 // });
 
-app.post('/minor', function(req, res) {
+app.post('/', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
     // パラメータ名、nameを出力
