@@ -2,7 +2,7 @@ $(function() {
 
     // var host = location.origin.replace(/^http/, 'ws')
     // var ws = new WebSocket(host);
-    var ws = new WebSocket("ws://desolate-dusk-67291.herokuapp.com");
+    var ws = new WebSocket("ws://desolate-dusk-67291.herokuapp.com:8443");
     //var ws = new WebSocket("ws://localhost:8443");
     //socket = io.connect("http://localhost:8443");
     var stock_request = {
