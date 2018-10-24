@@ -18,6 +18,8 @@ var http= require('https');
 require('date-utils');
 var dateFormat = require('dateformat');
 
+var $ = require('jQuery'); //Jquery
+
 //client
 var WebSocketServer = require('ws').Server
 
@@ -139,6 +141,11 @@ app.use('/users', usersRouter);
 // });
 
 // error handler
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -173,6 +180,7 @@ console.log('Server is online.');
 app.post('/', function(req, res) {
     // リクエストボディを出力
     //console.log(req.body);
+    
     // パラメータ名、nameを出力
     res.set('Content-Type', 'application/json');
     console.log(req.body.minor);
@@ -183,15 +191,20 @@ app.post('/', function(req, res) {
         if(seat_list[0].state == 0){
             seat_list[0].state = 1
             seat_list[0].date = dateFormat(Date());
-            exportCSV(seat_list[0]);
+            //exportCSV(seat_list[0]);
             stocks["1"] = 1
+        
+            //$('#' +"1"+ ' span').addClass('label-danger');
+            // $('#' +"1"+ ' span').css('font-size','24px');
+            // $('#' +"1"+ ' span').removeClass('label-success');
+            // $('#' +"1"+ ' span').html('離席')
         }
         //離席処理
         timer1 = setTimeout(function () { 
             seat_list[0].state = 0
             seat_list[0].date = dateFormat(Date());
             stocks["1"] =0
-            exportCSV(seat_list[0]);
+            //exportCSV(seat_list[0]);
             //ログ処理
             console.log("１番席離席しました")
         },30000);
@@ -203,7 +216,7 @@ app.post('/', function(req, res) {
         if(seat_list[1].state == 0){
             seat_list[1].state = 1
             seat_list[1].date = dateFormat(Date());
-            exportCSV(seat_list[1]);
+            //exportCSV(seat_list[1]);
             stocks["2"] = 1
         }
         //離席処理
@@ -211,7 +224,7 @@ app.post('/', function(req, res) {
             seat_list[1].state = 0
             seat_list[1].date = dateFormat(Date());
             stocks["2"] =0
-            exportCSV(seat_list[1]);
+            //exportCSV(seat_list[1]);
             //ログ処理
             console.log("2番席離席しました")
         },30000);
@@ -223,7 +236,7 @@ app.post('/', function(req, res) {
         if(seat_list[2].state == 0){
             seat_list[2].state = 1
             seat_list[2].date = dateFormat(Date());
-            exportCSV(seat_list[2]);
+            //exportCSV(seat_list[2]);
             stocks["3"] = 1
             }
         //離席処理
@@ -232,7 +245,7 @@ app.post('/', function(req, res) {
             seat_list[2].date = dateFormat(Date());
             stocks["3"] =0
             //ログ処理
-            exportCSV(seat_list[2]);
+            //exportCSV(seat_list[2]);
             console.log("3番席離席しました")
         },30000);
     }
@@ -243,7 +256,7 @@ app.post('/', function(req, res) {
         if(seat_list[3].state == 0){
             seat_list[3].state = 1
             seat_list[3].date = dateFormat(Date());
-            exportCSV(seat_list[3]);
+            //exportCSV(seat_list[3]);
             stocks["4"] = 1
         }
         //離席処理
@@ -252,7 +265,7 @@ app.post('/', function(req, res) {
             seat_list[3].date = dateFormat(Date());
             stocks["4"] =0
             //ログ処理
-            exportCSV(seat_list[3]);
+            //exportCSV(seat_list[3]);
             console.log("4番席離席しました")
         },30000);
     }
@@ -263,7 +276,7 @@ app.post('/', function(req, res) {
             if(seat_list[4].state == 0){
                 seat_list[4].state = 1
                 seat_list[4].date = dateFormat(Date());
-                exportCSV(seat_list[4]);
+                //exportCSV(seat_list[4]);
                 stocks["5"] = 1
             }
             //離席処理
@@ -272,7 +285,7 @@ app.post('/', function(req, res) {
                 seat_list[4].date = dateFormat(Date());
                 stocks["5"] =0
                 //ログ処理
-                exportCSV(seat_list[4]);
+                //exportCSV(seat_list[4]);
                 console.log("5番席離席しました")
             },30000);
         }
@@ -283,7 +296,7 @@ app.post('/', function(req, res) {
         if(seat_list[5].state == 0){
             seat_list[5].state = 1
             seat_list[5].date = dateFormat(Date());
-            exportCSV(seat_list[5]);
+            //exportCSV(seat_list[5]);
             stocks["6"] = 1
         }
         //離席処理
@@ -292,7 +305,7 @@ app.post('/', function(req, res) {
             seat_list[5].date = dateFormat(Date());
             stocks["6"] =0
             //ログ処理
-            exportCSV(seat_list[5]);
+            //exportCSV(seat_list[5]);
             console.log("6番席離席しました")
         },30000);
     }
@@ -304,7 +317,7 @@ app.post('/', function(req, res) {
         if(seat_list[6].state == 0){
             seat_list[6].state = 1
             seat_list[6].date = dateFormat(Date());
-            exportCSV(seat_list[6]);
+            //exportCSV(seat_list[6]);
             stocks["7"] = 1
         }
         //離席処理
@@ -313,7 +326,7 @@ app.post('/', function(req, res) {
             seat_list[6].date = dateFormat(Date());;
             stocks["7"] =0
             //ログ処理
-            exportCSV(seat_list[6]);
+            //exportCSV(seat_list[6]);
             console.log("7番席離席しました")
         },30000);
     }
@@ -325,7 +338,7 @@ app.post('/', function(req, res) {
         if(seat_list[7].state == 0){
             seat_list[7].state = 1
             seat_list[7].date = dateFormat(Date());
-            exportCSV(seat_list[7]);
+            //exportCSV(seat_list[7]);
             stocks["8"] = 1
         }
         //離席処理
@@ -334,7 +347,7 @@ app.post('/', function(req, res) {
             seat_list[7].date = dateFormat(Date());
             stocks["8"] =0
             //ログ処理
-            exportCSV(seat_list[7]);
+            //exportCSV(seat_list[7]);
             console.log("8番席離席しました")
         },30000);
     }
@@ -346,7 +359,7 @@ app.post('/', function(req, res) {
         if(seat_list[8].state == 0){
             seat_list[8].state = 1
             seat_list[8].date = dateFormat(Date());
-            exportCSV(seat_list[8]);
+            //exportCSV(seat_list[8]);
             stocks["9"] = 1
         }
         //離席処理
@@ -355,7 +368,7 @@ app.post('/', function(req, res) {
             seat_list[8].date = dateFormat(Date());;
             stocks["9"] =0
             //ログ処理
-            exportCSV(seat_list[8]);
+            //exportCSV(seat_list[8]);
             console.log("9番席離席しました")
         },30000);
     }
@@ -367,7 +380,7 @@ app.post('/', function(req, res) {
         if(seat_list[9].state == 0){
             seat_list[9].state = 1
             seat_list[9].date = dateFormat(Date());;
-            exportCSV(seat_list[9]);
+            //exportCSV(seat_list[9]);
             stocks["10"] = 1
         }
         //離席処理
@@ -376,7 +389,7 @@ app.post('/', function(req, res) {
             seat_list[9].date = dateFormat(Date());;
             stocks["10"] =0
             //ログ処理
-            exportCSV(seat_list[9]);
+            //exportCSV(seat_list[9]);
             console.log("10番席離席しました")
         },30000);
     }
@@ -388,7 +401,7 @@ app.post('/', function(req, res) {
         if(seat_list[10].state == 0){
             seat_list[10].state = 1
             seat_list[10].date = dateFormat(Date());;
-            exportCSV(seat_list[10]);
+            //exportCSV(seat_list[10]);
             stocks["11"] = 1
         }
         //離席処理
@@ -397,7 +410,7 @@ app.post('/', function(req, res) {
             seat_list[10].date = dateFormat(Date());;
             stocks["11"] =0
             //ログ処理
-            exportCSV(seat_list[10]);
+            //exportCSV(seat_list[10]);
             console.log("11番席離席しました")
         },30000);
     }
@@ -409,7 +422,7 @@ app.post('/', function(req, res) {
         if(seat_list[11].state == 0){
             seat_list[11].state = 1
             seat_list[11].date = dateFormat(Date());;
-            exportCSV(seat_list[11]);
+            //exportCSV(seat_list[11]);
             stocks["12"] = 1
         }
         //離席処理
@@ -418,7 +431,7 @@ app.post('/', function(req, res) {
             seat_list[11].date = dateFormat(Date());;
             stocks["12"] =0
             //ログ処理
-            exportCSV(seat_list[11]);
+            //exportCSV(seat_list[11]);
             console.log("12番席離席しました")
         },30000);
     }
@@ -430,7 +443,7 @@ app.post('/', function(req, res) {
         if(seat_list[12].state == 0){
             seat_list[12].state = 1
             seat_list[12].date = dateFormat(Date());;
-            exportCSV(seat_list[12]);
+            //exportCSV(seat_list[12]);
             stocks["13"] = 1
         }
         //離席処理
@@ -439,7 +452,7 @@ app.post('/', function(req, res) {
             seat_list[12].date = dateFormat(Date());;
             stocks["13"] =0
             //ログ処理
-            exportCSV(seat_list[12]);
+            //exportCSV(seat_list[12]);
             console.log("13番席離席しました")
         },30000);
     }
@@ -451,7 +464,7 @@ app.post('/', function(req, res) {
         if(seat_list[13].state == 0){
             seat_list[13].state = 1
             seat_list[13].date = dateFormat(Date());;
-            exportCSV(seat_list[13]);
+            //exportCSV(seat_list[13]);
             stocks["14"] = 1
         }
         //離席処理
@@ -460,7 +473,7 @@ app.post('/', function(req, res) {
             seat_list[13].date = dateFormat(Date());;
             stocks["14"] =0
             //ログ処理
-            exportCSV(seat_list[13]);
+            //exportCSV(seat_list[13]);
             console.log("14番席離席しました")
         },30000);
     }
@@ -472,7 +485,7 @@ app.post('/', function(req, res) {
         if(seat_list[14].state == 0){
             seat_list[14].state = 1
             seat_list[14].date = dateFormat(Date());;
-            exportCSV(seat_list[14]);
+            //exportCSV(seat_list[14]);
             stocks["15"] = 1
         }
         //離席処理
@@ -481,7 +494,7 @@ app.post('/', function(req, res) {
             seat_list[14].date = dateFormat(Date());;
             stocks["15"] =0
             //ログ処理
-            exportCSV(seat_list[14]);
+            //exportCSV(seat_list[14]);
             console.log("15番席離席しました")
         },30000);
     }
@@ -493,7 +506,7 @@ app.post('/', function(req, res) {
         if(seat_list[15].state == 0){
             seat_list[15].state = 1
             seat_list[15].date = dateFormat(Date());;
-            exportCSV(seat_list[15]);
+            //exportCSV(seat_list[15]);
             stocks["16"] = 1
         }
         //離席処理
@@ -502,7 +515,7 @@ app.post('/', function(req, res) {
             seat_list[15].date = dateFormat(Date());;
             stocks["16"] =0
             //ログ処理
-            exportCSV(seat_list[15]);
+            //exportCSV(seat_list[15]);
             console.log("16番席離席しました")
         },30000);
     }
