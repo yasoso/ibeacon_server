@@ -1,8 +1,4 @@
-//モジュールインポート
-//herokuデプロイ
-//git add .
-//git commit -m "first commit"
-//git push heroku master
+
 
 var createError = require('http-errors');
 var express = require('express');
@@ -51,7 +47,7 @@ var stocks = {"1": 0,
               "15": 0,
               "16": 0
       }
-//      
+    
 var seat_list = [ 
     {seatID:1,state:0,date:null},
     {seatID:2,state:0,date:null},
@@ -102,12 +98,6 @@ app.use('/public', express.static('public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// error handler
 app.use(function(req, res, next){
     res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -163,10 +153,6 @@ app.post('/', function(req, res) {
             //exportCSV(seat_list[0]);
             stocks["1"] = 1
         
-            //$('#' +"1"+ ' span').addClass('label-danger');
-            // $('#' +"1"+ ' span').css('font-size','24px');
-            // $('#' +"1"+ ' span').removeClass('label-success');
-            // $('#' +"1"+ ' span').html('離席')
         }
         //離席処理
         timer1 = setTimeout(function () { 
@@ -498,59 +484,6 @@ function originIsAllowed(origin) {
   return true;
 }
 
-
-//  //client
-//  wss.on('connection', function(ws) {
-//   	var clientStockUpdater;
-//   	var sendStockUpdates = function(ws) {
-//   		if (ws.readyState == 1) {
-//   			var stocksObj = {};
-
-//   			//サーバ側で更新した在席情報の値をクライアント側に送信する
-//   			for (var i=0; i<clientStocks.length; i++) {
-//   				symbol = clientStocks[i];
-//   				stocksObj[symbol] = stocks[symbol];
-//   			}
-
-//   			ws.send(JSON.stringify(stocksObj));
-//   		}
-//   	}
-
-//   	clientStockUpdater = setInterval(function() {
-//           sendStockUpdates(ws)
-//           console.log("send");
-//   	}, 1000);
-//       var clientStocks = [];
-
-//   	//クライアントからメッセージを受け取る
-//   	ws.on('message', function(message) {
-//  		var stock_request = JSON.parse(message);
-
-//  		//クライアントで定義したstocksオブジェクトを取り出す
-//           clientStocks = stock_request['stocks'];
-//            		sendStockUpdates(ws);
-//  	});
-
-//   	ws.on('close', function() {
-//   		if (typeof clientStockUpdater !== 'undefined') {
-//   			clearInterval(clientStockUpdater);
-//   		}
-//       });
-//   })
-
-
-
-module.exports = app;
-
-/*wsServer = new WebSocketServer({
-  httpServer: server,
-  // You should not use autoAcceptConnections for production
-  // applications, as it defeats all standard cross-origin protection
-  // facilities built into the protocol and the browser.  You should
-  // *always* verify the connection's origin and decide whether or not
-  // to accept it.
-  autoAcceptConnections: false
-});*/
 
 // jsonをcsvで保存するfunction
 function exportCSV(content){
