@@ -12,58 +12,25 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-//var socket = require('./routes/socket');
-// var WebSocketServer = require('websocket').server;
+
 var http= require('https');
 require('date-utils');
 var dateFormat = require('dateformat');
 
-var $ = require('jQuery'); //Jquery
+
 
 //client
 var WebSocketServer = require('ws').Server
 
 
-// var port = process.env.PORT || 9000;
-//var PORT = process.env.PORT || 3000;
-//-----------------------------------
-//{port:8443}
-
 var wss = new WebSocketServer({
     port : 8443,
    //"path"   : '/update' // パス指定すると、このパスのみ生きるっぽい
 });
-//-----------------------------------
-// var server_client = http.createServer();
+
 var app = express()
 
-//---------------------------------
-// app.use(express.static(__dirname + "/"))
 
-// var server = http.createServer(app)
-// server.listen(5000)
-
-// console.log("http server listening on %d", 5000)
-
-// var wss = new WebSocketServer({server: server})
-// console.log("websocket server created")
-//-------------------------------------
-// var port = process.env.PORT || 5000
-
-// app.use(express.static(__dirname + "/"))
-
-// var server = http.createServer(app)
-// server.listen(port)
-
-// console.log("http server listening on %d", port)
-
-// var wss = new WebSocketServer({server: server})
-// app.use(express.static(__dirname + '/'));
-// var server = http.createServer(app)
-// server.listen(port_client)
-
-//console.log("http server listening on %d", port)
-//var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 
@@ -167,15 +134,17 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//app.listen(9000);
 
-console.log('Server is online.');
+app.get('/seatUpdate', function(req, res){
+    console.log(stocks);
+    //res.send(stocks);
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify({"stocks":stocks}));
+  
+  });
 
-// app.set('port', (process.env.PORT || 9000));
 
-// app.listen(app.get('port'), function() {
-//     console.log('Node app is running');
-// });
+
 
 app.post('/', function(req, res) {
     // リクエストボディを出力
@@ -530,44 +499,44 @@ function originIsAllowed(origin) {
 }
 
 
- //client
- wss.on('connection', function(ws) {
-  	var clientStockUpdater;
-  	var sendStockUpdates = function(ws) {
-  		if (ws.readyState == 1) {
-  			var stocksObj = {};
+//  //client
+//  wss.on('connection', function(ws) {
+//   	var clientStockUpdater;
+//   	var sendStockUpdates = function(ws) {
+//   		if (ws.readyState == 1) {
+//   			var stocksObj = {};
 
-  			//サーバ側で更新した在席情報の値をクライアント側に送信する
-  			for (var i=0; i<clientStocks.length; i++) {
-  				symbol = clientStocks[i];
-  				stocksObj[symbol] = stocks[symbol];
-  			}
+//   			//サーバ側で更新した在席情報の値をクライアント側に送信する
+//   			for (var i=0; i<clientStocks.length; i++) {
+//   				symbol = clientStocks[i];
+//   				stocksObj[symbol] = stocks[symbol];
+//   			}
 
-  			ws.send(JSON.stringify(stocksObj));
-  		}
-  	}
+//   			ws.send(JSON.stringify(stocksObj));
+//   		}
+//   	}
 
-  	clientStockUpdater = setInterval(function() {
-          sendStockUpdates(ws)
-          console.log("send");
-  	}, 1000);
-      var clientStocks = [];
+//   	clientStockUpdater = setInterval(function() {
+//           sendStockUpdates(ws)
+//           console.log("send");
+//   	}, 1000);
+//       var clientStocks = [];
 
-  	//クライアントからメッセージを受け取る
-  	ws.on('message', function(message) {
- 		var stock_request = JSON.parse(message);
+//   	//クライアントからメッセージを受け取る
+//   	ws.on('message', function(message) {
+//  		var stock_request = JSON.parse(message);
 
- 		//クライアントで定義したstocksオブジェクトを取り出す
-          clientStocks = stock_request['stocks'];
-           		sendStockUpdates(ws);
- 	});
+//  		//クライアントで定義したstocksオブジェクトを取り出す
+//           clientStocks = stock_request['stocks'];
+//            		sendStockUpdates(ws);
+//  	});
 
-  	ws.on('close', function() {
-  		if (typeof clientStockUpdater !== 'undefined') {
-  			clearInterval(clientStockUpdater);
-  		}
-      });
-  })
+//   	ws.on('close', function() {
+//   		if (typeof clientStockUpdater !== 'undefined') {
+//   			clearInterval(clientStockUpdater);
+//   		}
+//       });
+//   })
 
 
 
